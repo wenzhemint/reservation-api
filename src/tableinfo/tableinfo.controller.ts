@@ -6,9 +6,11 @@ import {
     Body,
     Put,
     Delete,
+    ValidationPipe
   } from '@nestjs/common';
   import { TableInfoService } from './tableinfo.service';
   import { TableInfo, TableInfo as TableInfoModel } from '@prisma/client';
+  import { TableInfoBodyDto } from './tableinfo.dto'
   
   @Controller('tableinfo')
   export class TableInfoController {
@@ -30,7 +32,8 @@ import {
   
     @Post()
     async createTableInfo(
-      @Body() tableInfoData: { tableNo: string; tableSize: string },
+      @Body(new ValidationPipe({ transform: true })) 
+      tableInfoData: TableInfoBodyDto,
     ): Promise<TableInfoModel> {
       return this.tableInfoService.createTableInfo(tableInfoData);
     }
