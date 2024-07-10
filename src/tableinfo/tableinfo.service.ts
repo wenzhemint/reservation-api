@@ -4,12 +4,12 @@ import { TableInfo, Prisma } from '@prisma/client';
 
 @Injectable()
 export class TableInfoService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prismaService: PrismaService) {}
 
   async tableInfo(
     tableInfoWhereUniqueInput: Prisma.TableInfoWhereUniqueInput,
   ): Promise<TableInfo | null> {
-    return this.prisma.tableInfo.findUnique({
+    return this.prismaService.tableInfo.findUnique({
       where: tableInfoWhereUniqueInput,
     });
   }
@@ -22,7 +22,7 @@ export class TableInfoService {
     orderBy?: Prisma.TableInfoOrderByWithRelationInput;
   }): Promise<TableInfo[]> {
     const { skip, take, cursor, where, orderBy } = params;
-    return this.prisma.tableInfo.findMany({
+    return this.prismaService.tableInfo.findMany({
       skip,
       take,
       cursor,
@@ -32,7 +32,7 @@ export class TableInfoService {
   }
 
   async createTableInfo(data: Prisma.TableInfoCreateInput): Promise<TableInfo> {
-    return this.prisma.tableInfo.create({
+    return this.prismaService.tableInfo.create({
       data,
     });
   }
@@ -42,14 +42,14 @@ export class TableInfoService {
     data: Prisma.TableInfoUpdateInput;
   }): Promise<TableInfo> {
     const { where, data } = params;
-    return this.prisma.tableInfo.update({
+    return this.prismaService.tableInfo.update({
       data,
       where,
     });
   }
 
   async deleteTableInfo(where: Prisma.TableInfoWhereUniqueInput): Promise<TableInfo> {
-    return this.prisma.tableInfo.delete({
+    return this.prismaService.tableInfo.delete({
       where,
     });
   }

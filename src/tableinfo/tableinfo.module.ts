@@ -1,13 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TableInfoService } from './tableinfo.service';
-import { TableInfoController } from './tableinfo.controller'
-import { PrismaService } from 'src/prisma/prisma.service'
+import { TableInfoController } from './tableinfo.controller';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
-    imports: [],
+    imports: [
+        PrismaModule
+    ],
     providers: [
-        TableInfoService,
-        PrismaService
+        TableInfoService
     ],
     controllers: [TableInfoController],
     exports: [TableInfoService],
