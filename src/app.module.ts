@@ -9,6 +9,7 @@ import { LoggingInterceptor } from './logging.interceptor';
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
 import * as winston from 'winston';
 import { randomUUID } from 'node:crypto';
+import { ErrorThrowerModule } from "./ErrorThrower/errorThrower.module";
 
 @Module({
   imports: [
@@ -41,7 +42,8 @@ import { randomUUID } from 'node:crypto';
       }),
       inject: [ConfigService, ClsService],
     }),
-    TableInfoModule
+    TableInfoModule,
+    ErrorThrowerModule
   ],
   controllers: [AppController],
   providers: [

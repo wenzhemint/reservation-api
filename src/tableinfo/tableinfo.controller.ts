@@ -10,32 +10,51 @@ import {
   } from '@nestjs/common';
   import { TableInfoService } from './tableinfo.service';
   import { TableInfo, TableInfo as TableInfoModel } from '@prisma/client';
-  import { TableInfoBodyDto } from './tableinfo.dto'
+  import { TableInfoBodyDto } from './tableinfo.dto';
+  import { ErrorThrower } from "../ErrorThrower/errorThrower.service";
   
   @Controller('tableinfo')
   export class TableInfoController {
     constructor(
       private readonly tableInfoService: TableInfoService,
+      private readonly errorThrower: ErrorThrower
     ) {}
 
     @Get()
     async getTableInfos(): Promise<TableInfoModel[]> {
-      return this.tableInfoService.tableInfos({});
+      try {
+        return this.tableInfoService.tableInfos({});
+      } catch (e) {
+        this.errorThrower.throw(e.message);
+      }
     }
 
     @Get('/:id')
     async getOneTableInfo(
         @Param('id') id: string
-    ): Promise<TableInfoModel> {
-      return this.tableInfoService.tableInfo({ id: Number(id) });
+    ) {
+      try {
+        const tableinfo = await this.tableInfoService.tableInfo({ id: Number(id) });
+        console.log("== tableinfo: ", tableinfo);
+        if(!tableinfo) {
+          return {};
+        }
+        return tableinfo;
+      } catch (e) {
+        this.errorThrower.throw(e.message);
+      }
     }
   
     @Post()
     async createTableInfo(
       @Body(new ValidationPipe({ transform: true })) 
-      tableInfoData: TableInfoBodyDto,
+      body: TableInfoBodyDto,
     ): Promise<TableInfoModel> {
-      return this.tableInfoService.createTableInfo(tableInfoData);
+      try {
+        return await this.tableInfoService.createTableInfo(body);
+      } catch (e) {
+        this.errorThrower.throw(e.message);
+      }
     }
   
     @Put('/:id')
@@ -43,17 +62,25 @@ import {
         @Param('id') id: string,
         @Body() tableInfo: TableInfo,
     ): Promise<TableInfoModel> {
-      return this.tableInfoService.updateTableInfo({
-        where: { id: Number(id) },
-        data: { 
-            tableNo: tableInfo.tableNo,
-            tableSize: tableInfo.tableSize
-        },
-      });
+      try {
+        return await this.tableInfoService.updateTableInfo({
+          where: { id: Number(id) },
+          data: { 
+              tableNo: tableInfo.tableNo,
+              tableSize: tableInfo.tableSize
+          },
+        });
+      } catch (e) {
+        this.errorThrower.throw(e.message);
+      }
     }
   
     @Delete('/:id')
     async deleteTableInfo(@Param('id') id: string): Promise<TableInfo> {
-      return this.tableInfoService.deleteTableInfo({ id: Number(id) });
+      try {
+        return await this.tableInfoService.deleteTableInfo({ id: Number(id) });
+      } catch (e) {
+        this.errorThrower.throw(e.message);
+      }
     }
   }
