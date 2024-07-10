@@ -32,6 +32,15 @@
 $ npm install
 ```
 
+## Database and Migration
+
+```bash
+# pull postgres database from docker hub and run it locally
+$ npm run start:postgres
+# migrate database
+$ npx prisma migrate dev --name init
+```
+
 ## Running the app
 
 ```bash
