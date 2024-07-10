@@ -10,6 +10,11 @@ import {
     isNotEmpty 
 } from 'class-validator';
 
+enum TableSize {
+    Medium = 'M',
+    Large = 'L'
+}
+
 export class TableInfoBodyDto {
     @IsString()
     @IsNotEmpty()
@@ -17,6 +22,6 @@ export class TableInfoBodyDto {
 
     @IsString()
     @IsNotEmpty()
-    @IsIn(['M','L'])
+    @IsIn([TableSize.Medium, TableSize.Large])
     tableSize: string;
 }
