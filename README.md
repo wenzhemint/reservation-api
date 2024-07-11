@@ -90,6 +90,8 @@ Nest is [MIT licensed](LICENSE).
 
 The app provides following APIs.
 
+  Endpoints for TableInfo: 
+
     GET /api/v1/tableinfo
     
     GET /api/v1/tableinfo/info/2
@@ -101,6 +103,8 @@ The app provides following APIs.
     PUT /api/v1/tableinfo/2
 
     DELETE /api/v1/tableinfo/2
+
+  Endpoints for Booking: 
 
     GET /api/v1/booking
 
