@@ -5,16 +5,8 @@ import { TableInfo, Prisma } from '@prisma/client';
 @Injectable()
 export class TableInfoService {
   constructor(private prismaService: PrismaService) {}
-
-  async tableInfo(
-    tableInfoWhereUniqueInput: Prisma.TableInfoWhereUniqueInput,
-  ): Promise<TableInfo | null> {
-    return this.prismaService.tableInfo.findUnique({
-      where: tableInfoWhereUniqueInput,
-    });
-  }
-
-  async tableInfos(params: {
+  
+  async getAllTableInfos(params: {
     skip?: number;
     take?: number;
     cursor?: Prisma.TableInfoWhereUniqueInput;
@@ -28,6 +20,14 @@ export class TableInfoService {
       cursor,
       where,
       orderBy,
+    });
+  }
+
+  async getOneTableInfo(
+    tableInfoWhereUniqueInput: Prisma.TableInfoWhereUniqueInput,
+  ): Promise<TableInfo | null> {
+    return this.prismaService.tableInfo.findUnique({
+      where: tableInfoWhereUniqueInput,
     });
   }
 

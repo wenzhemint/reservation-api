@@ -4,6 +4,7 @@ import { ClsService, ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TableInfoModule } from './tableinfo/tableinfo.module';
+import { BookingModule } from './booking/booking.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { LoggingInterceptor } from './logging.interceptor';
 import { utilities as nestWinstonModuleUtilities, WinstonModule } from 'nest-winston';
@@ -42,8 +43,9 @@ import { ErrorThrowerModule } from "./ErrorThrower/errorThrower.module";
       }),
       inject: [ConfigService, ClsService],
     }),
+    ErrorThrowerModule,
     TableInfoModule,
-    ErrorThrowerModule
+    BookingModule
   ],
   controllers: [AppController],
   providers: [

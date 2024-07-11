@@ -17,4 +17,17 @@ model TableInfo {
   id    Int     @default(autoincrement()) @id
   tableNo String  @unique
   tableSize  String?
+  bookings  Booking[]
+}
+
+model Booking {
+  id    Int     @default(autoincrement()) @id
+  guestName String
+  contactInfo  String
+  arrivalTime  DateTime
+  bookingStatus  Boolean @default(false)
+  orderedTable    TableInfo?    @relation(fields: [tableInfoId], references: [id])
+  tableInfoId  Int
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
