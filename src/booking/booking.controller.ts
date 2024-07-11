@@ -29,7 +29,7 @@ export class BookingController {
       }
     }
   
-    @Get('/:id')
+    @Get(':id')
     async getOneBooking(
         @Param('id') id: string
     ) {
@@ -69,7 +69,7 @@ export class BookingController {
         }
     }
   
-    @Put('/:id')
+    @Put(':id')
     async updateBooking(
         @Param('id') id: string,
         @Body() booking: Booking,
@@ -89,7 +89,7 @@ export class BookingController {
         }
     }
   
-    @Delete('/:id')
+    @Delete(':id')
     async deleteBooking(@Param('id') id: string): Promise<Booking> {
         try {
             return await this.bookingService.deleteBooking({ id: Number(id) });

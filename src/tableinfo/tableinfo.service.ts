@@ -31,6 +31,21 @@ export class TableInfoService {
     });
   }
 
+  async getAvailableTables(
+    params: Date
+  ): Promise<TableInfo[]> {
+    return this.prismaService.tableInfo.findMany({
+      include: {
+        bookings: {
+          where: {
+            arrivalTime: params,
+            bookingStatus: true
+          }
+        }
+      },
+    });
+  }
+
   async createTableInfo(data: Prisma.TableInfoCreateInput): Promise<TableInfo> {
     return this.prismaService.tableInfo.create({
       data,

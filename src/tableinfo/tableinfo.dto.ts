@@ -25,3 +25,9 @@ export class TableInfoBodyDto {
     @IsIn([TableSize.Medium, TableSize.Large])
     tableSize: string;
 }
+
+export class getAllAvailableTablesDto {
+    @IsString()
+    @IsNotEmpty()
+    arrivalTime: string;
+}

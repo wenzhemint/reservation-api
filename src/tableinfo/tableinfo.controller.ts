@@ -6,11 +6,12 @@ import {
   Body,
   Put,
   Delete,
+  Query,
   ValidationPipe
 } from '@nestjs/common';
 import { TableInfoService } from './tableinfo.service';
 import { TableInfo, Prisma } from '@prisma/client';
-import { TableInfoBodyDto } from './tableinfo.dto';
+import { TableInfoBodyDto, getAllAvailableTablesDto } from './tableinfo.dto';
 import { ErrorThrower } from "../ErrorThrower/errorThrower.service";
 
 @Controller('tableinfo')
@@ -29,7 +30,7 @@ export class TableInfoController {
     }
   }
 
-  @Get('/:id')
+  @Get('fetchone/:id')
   async getOneTableInfo(
       @Param('id') id: string
   ) {
@@ -40,6 +41,24 @@ export class TableInfoController {
         return {};
       }
       return tableinfo;
+    } catch (e) {
+      this.errorThrower.throw(e.message);
+    }
+  }
+
+  @Get('available')
+  async getAllAvailableTables(
+    @Query() query: getAllAvailableTablesDto,
+  ) {
+    const { arrivalTime } = query;
+    const datetimeConverted = new Date(arrivalTime);
+    if(datetimeConverted.toString() == 'Invalid Date') {
+      this.errorThrower.throw("Invalid Date Value", 400);
+    }
+
+    try {
+      const tablesToFilter = await this.tableInfoService.getAvailableTables(datetimeConverted);
+      return await this.tableInfoService.getAvailableTables(datetimeConverted);
     } catch (e) {
       this.errorThrower.throw(e.message);
     }
@@ -57,7 +76,7 @@ export class TableInfoController {
     }
   }
 
-  @Put('/:id')
+  @Put(':id')
   async updateTableInfo(
       @Param('id') id: string,
       @Body() tableInfo: TableInfo,
@@ -75,7 +94,7 @@ export class TableInfoController {
     }
   }
 
-  @Delete('/:id')
+  @Delete(':id')
   async deleteTableInfo(@Param('id') id: string): Promise<TableInfo> {
     try {
       return await this.tableInfoService.deleteTableInfo({ id: Number(id) });
