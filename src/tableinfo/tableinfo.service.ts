@@ -35,14 +35,19 @@ export class TableInfoService {
     params: Date
   ): Promise<TableInfo[]> {
     return this.prismaService.tableInfo.findMany({
-      include: {
-        bookings: {
-          where: {
-            arrivalTime: params,
-            bookingStatus: true
-          }
+      where: {
+        NOT: {
+          bookings: {
+            some: {
+              arrivalTime: params,
+              bookingStatus: true
+            }
+          },
         }
       },
+      include: {
+        bookings: true
+      }
     });
   }
 
