@@ -41,6 +41,13 @@ $ npm run start:postgres
 $ npx prisma migrate dev --name init
 ```
 
+## Data and Integration
+
+```bash
+# sql file for data integration. 
+$ Import '/db/DbIntegration.sql' file in the Postgres database to import necessary data. 
+```
+
 ## Running the app
 
 ```bash
