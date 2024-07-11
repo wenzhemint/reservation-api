@@ -14,7 +14,7 @@ export class BookingService {
         orderBy?: Prisma.BookingOrderByWithRelationInput;
     }): Promise<Booking[]> {
         const { skip, take, cursor, where, orderBy } = params;
-        return this.prismaService.booking.findMany({
+        return await this.prismaService.booking.findMany({
             skip,
             take,
             cursor,
@@ -26,13 +26,13 @@ export class BookingService {
     async getOneBooking(
         bookingWhereUniqueInput: Prisma.BookingWhereUniqueInput,
     ): Promise<Booking | null> {
-        return this.prismaService.booking.findUnique({
+        return await this.prismaService.booking.findUnique({
             where: bookingWhereUniqueInput,
         });
     }
 
     async createBooking(data: Prisma.BookingCreateInput): Promise<Booking> {
-        return this.prismaService.booking.create({
+        return await this.prismaService.booking.create({
             data,
         });
     }
@@ -42,14 +42,14 @@ export class BookingService {
         data: Prisma.BookingUpdateInput;
     }): Promise<Booking> {
         const { where, data } = params;
-        return this.prismaService.booking.update({
+        return await this.prismaService.booking.update({
             data,
             where,
         });
     }
 
     async deleteBooking(where: Prisma.BookingWhereUniqueInput): Promise<Booking> {
-        return this.prismaService.booking.delete({
+        return await this.prismaService.booking.delete({
             where,
         });
     }

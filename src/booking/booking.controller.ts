@@ -23,7 +23,7 @@ export class BookingController {
     @Get()
     async getBookings(): Promise<Booking[]> {
       try {
-        return this.bookingService.getAllBookings({});
+        return await this.bookingService.getAllBookings({});
       } catch (e) {
         this.errorThrower.throw(e.message);
       }

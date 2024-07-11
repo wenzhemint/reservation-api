@@ -14,7 +14,7 @@ export class TableInfoService {
     orderBy?: Prisma.TableInfoOrderByWithRelationInput;
   }): Promise<TableInfo[]> {
     const { skip, take, cursor, where, orderBy } = params;
-    return this.prismaService.tableInfo.findMany({
+    return await this.prismaService.tableInfo.findMany({
       skip,
       take,
       cursor,
@@ -26,7 +26,7 @@ export class TableInfoService {
   async getOneTableInfo(
     tableInfoWhereUniqueInput: Prisma.TableInfoWhereUniqueInput,
   ): Promise<TableInfo | null> {
-    return this.prismaService.tableInfo.findUnique({
+    return await this.prismaService.tableInfo.findUnique({
       where: tableInfoWhereUniqueInput,
     });
   }
@@ -34,7 +34,7 @@ export class TableInfoService {
   async getAvailableTables(
     params: Date
   ): Promise<TableInfo[]> {
-    return this.prismaService.tableInfo.findMany({
+    return await this.prismaService.tableInfo.findMany({
       where: {
         NOT: {
           bookings: {
@@ -52,7 +52,7 @@ export class TableInfoService {
   }
 
   async createTableInfo(data: Prisma.TableInfoCreateInput): Promise<TableInfo> {
-    return this.prismaService.tableInfo.create({
+    return await this.prismaService.tableInfo.create({
       data,
     });
   }
@@ -62,14 +62,14 @@ export class TableInfoService {
     data: Prisma.TableInfoUpdateInput;
   }): Promise<TableInfo> {
     const { where, data } = params;
-    return this.prismaService.tableInfo.update({
+    return await this.prismaService.tableInfo.update({
       data,
       where,
     });
   }
 
   async deleteTableInfo(where: Prisma.TableInfoWhereUniqueInput): Promise<TableInfo> {
-    return this.prismaService.tableInfo.delete({
+    return await this.prismaService.tableInfo.delete({
       where,
     });
   }

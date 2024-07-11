@@ -24,7 +24,7 @@ export class TableInfoController {
   @Get()
   async getTableInfos(): Promise<TableInfo[]> {
     try {
-      return this.tableInfoService.getAllTableInfos({});
+      return await this.tableInfoService.getAllTableInfos({});
     } catch (e) {
       this.errorThrower.throw(e.message);
     }
