@@ -30,7 +30,7 @@ export class TableInfoController {
     }
   }
 
-  @Get('fetchone/:id')
+  @Get('info/:id')
   async getOneTableInfo(
       @Param('id') id: string
   ) {
@@ -69,6 +69,12 @@ export class TableInfoController {
     @Body(new ValidationPipe({ transform: true })) 
     body: TableInfoBodyDto,
   ): Promise<TableInfo> {
+    const tableinfo = await this.tableInfoService.getOneTableInfo({ id: Number(body.tableNo) });
+    console.log("== tableinfo: ", tableinfo);
+    if(tableinfo != null) {
+      this.errorThrower.throw("The 'tableNo' is already exist.", 400);
+    }
+
     try {
       return await this.tableInfoService.createTableInfo(body);
     } catch (e) {

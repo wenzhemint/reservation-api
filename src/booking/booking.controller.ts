@@ -29,7 +29,7 @@ export class BookingController {
       }
     }
   
-    @Get(':id')
+    @Get('info/:id')
     async getOneBooking(
         @Param('id') id: string
     ) {

@@ -85,3 +85,27 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Explore Rest APIs
+
+The app provides following APIs.
+
+    GET /api/v1/tableinfo
+    
+    GET /api/v1/tableinfo/info/2
+
+    GET /api/v1/tableinfo/available?arrivalTime=2024-07-20T10:10:15Z
+
+    POST /api/v1/tableinfo
+
+    PUT /api/v1/tableinfo/2
+
+    DELETE /api/v1/tableinfo/2
+
+    GET /api/v1/booking
+
+    GET /api/v1/booking/info/2
+
+    POST /api/v1/booking
+
+You can test them using postman or any other rest client.
