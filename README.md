@@ -22,9 +22,17 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+# Links to github repositories for Hilton-Hotel Reservation task. 
+
+Backend api :
+https://github.com/wenzhemint/reservation-api
+
+Frontend app:
+https://github.com/wenzhemint/reservation-app
+
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Build Restful API for a simple Reservation for Hilton Hotel using Nestjs, Prisma, Postgres, docker.
 
 ## Installation
 
