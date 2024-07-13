@@ -53,7 +53,7 @@ $ npx prisma migrate dev --name init
 
 ```bash
 # sql file for data integration. 
-$ Import '/db/DbIntegration.sql' file in the Postgres database to import necessary data. 
+$ Import '/db/TableInfo.sql' file in the Postgres database to import necessary data. 
 ```
 
 ## Running the app

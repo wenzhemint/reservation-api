@@ -24,7 +24,7 @@ export class BookingBodyDto {
     arrivalTime: string;
 
     @IsBoolean()
-    @IsNotEmpty()
+    @IsOptional()
     bookingStatus: boolean;
 
     @IsInt()

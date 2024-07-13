@@ -25,7 +25,7 @@ model Booking {
   guestName String
   contactInfo  String
   arrivalTime  DateTime
-  bookingStatus  Boolean @default(false)
+  bookingStatus  Boolean? @default(true)
   orderedTable    TableInfo?    @relation(fields: [tableInfoId], references: [id])
   tableInfoId  Int
   createdAt DateTime? @default(now())
