@@ -52,8 +52,15 @@ $ npx prisma migrate dev --name init
 ## Data and Integration
 
 ```bash
-# sql file for data integration. 
-$ Import '/db/TableInfo.sql' file in the Postgres database to import necessary data. 
+# sql file for data integration
+$ import '/db/TableInfo.sql' file in the Postgres database to import necessary data. 
+```
+
+## Local Environment Configuration
+
+```bash
+# Configure Local Environment Variables
+$ rename the '.env.example' file into '.env' to define local environment variables.  
 ```
 
 ## Running the app
